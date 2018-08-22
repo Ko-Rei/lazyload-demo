@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>懒加载</title>
+  <style>
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .clearfix {
+      content: '';
+      display: block;
+      clear: both;
+    }
+    .container img {
+      float: left;
+      width: 50%;
+    }
+    h1 {
+      float: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="container clearfix">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/1.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/2.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/3.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/4.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/5.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/6.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/7.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/8.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/9.jpg">
+    <h1 id="tip">hello</h1>
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/10.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/11.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/12.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/13.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/14.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/15.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/16.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/17.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/18.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/19.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/20.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/21.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/22.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/23.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/24.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/25.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/26.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/27.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/28.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/29.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/30.jpg">
+    <img src="imgs/cool-loading-animated-gif-3.gif" alt="" data-src="imgs/31.jpg">
+  </div>
+</body>
+</html>
+<script src="jquery-3.3.1.js"></script>
+<script>
+  //进页面直接调用
+  start()
+  // 滚动的时候执行加载函数
+  $(window).on('scroll',function(){
+    start()
+  })
+
+  //加载函数
+  function start(){
+    //not('[data-isLoaded]') 用来过滤已经加载过的，实现节流
+    $('.container img').not('[data-isLoaded]').each(function(){
+      if( isShow($(this)) ){
+        loadImg($(this))
+      }
+    })
+  }
+
+  function isShow($node){
+    return $node.offset().top <= $(window).height() + $(window).scrollTop()
+  }
+
+  function loadImg($img){
+    //setTimeout模拟延迟 测试效果用，实际环境不要加
+    // setTimeout(function(){
+      $img.attr('src', $img.attr('data-src'))
+    // },500)
+     //加载过后就添加 data-isLoaded属性
+      $img.attr('data-isLoaded',1)
+  }
+</script>
