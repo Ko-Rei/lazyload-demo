@@ -86,9 +86,9 @@
 
   function loadImg($img){
     //setTimeout模拟延迟 测试效果用，实际环境不要加
-    // setTimeout(function(){
+    setTimeout(function(){
       $img.attr('src', $img.attr('data-src'))
-    // },500)
+    },500)
      //加载过后就添加 data-isLoaded属性
       $img.attr('data-isLoaded',1)
   }
